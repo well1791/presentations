@@ -1,5 +1,9 @@
 const fp = {};
 
+const curryN = (n, f) => (...args) => args.length < n
+  ? curryN(n, f).bind(null, ...args)
+  : f(...args);
+
 fp.head = xs => xs.length === 0
   ? new Error('Cannot operate on an empty List')
   : xs[0];
@@ -48,7 +52,7 @@ fp.splitOn = curryN(2, (expr, str) => str.split(expr));
 
 fp.flip = f => curryN(2, (a, b) => f(b, a));
 
-fp.curry2 = (f, args) => curryN(2, f, args);
+fp.curry2 = f => curryN(2, f);
 
 fp.T = curryN(2, (arg, f) => f(arg));
 fp.A = curryN(2, (f, arg) => f(arg));
@@ -60,19 +64,3 @@ fp.divMod = curryN(2, (a, b) => b === 0
   : [a / b, a % b]);
 
 module.exports = fp;
-
-function curryN(n, f, args) {
-  const outArgs = args || [];
-  const conds = [{
-    test: outArgs.length === n,
-    expr: () => f.apply(f, outArgs)
-  }, {
-    test: outArgs.length < n,
-    expr: () => (...inArgs) => curryN(n, f, [].concat(outArgs, inArgs))
-  }, {
-    test: true,
-    expr: () => new Error(`Function allows only ${n} arguments`)
-  }];
-
-  return conds.find(cond => cond.test).expr();
-}
