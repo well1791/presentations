@@ -12,12 +12,12 @@ fp.tail = xs => xs.length === 0
   ? new Error('Cannot operate on an empty List')
   : xs.slice(1);
 
-fp.range = curryN(2, (from, to) => from >= to
-  ? []
-  : [].concat(from, fp.range(from + 1, to)));
-
 fp.cons = curryN(2, (x, xs) => [].concat(x, xs));
 fp.prepend = fp.cons;
+
+fp.range = curryN(2, (from, to) => from >= to
+  ? []
+  : fp.prepend(from, fp.range(from + 1, to)));
 
 fp.map = curryN(2, (f, xs) => xs.length === 0
   ? []
@@ -29,8 +29,10 @@ fp.zip = curryN(2, (xs, ys) => {
   }
   return xs.length === 0
     ? []
-    : [].concat([[fp.head(xs), fp.head(ys)]],
-                  fp.zip(fp.tail(xs), fp.tail(ys)))
+    : fp.prepend(
+      [[fp.head(xs), fp.head(ys)]],
+      fp.zip(fp.tail(xs), fp.tail(ys))
+    );
 });
 
 fp.foldr = curryN(3, (f, z, xs) => xs.length === 0
