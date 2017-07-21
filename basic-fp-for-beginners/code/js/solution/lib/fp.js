@@ -2,7 +2,7 @@ const fp = {};
 
 const curryN = (n, f) => (...args) => args.length < n
   ? curryN(n, f).bind(null, ...args)
-  : f(...args);
+  : f(...args); // => f.apply(null, args);
 
 fp.head = xs => xs.length === 0
   ? new Error('Cannot operate on an empty List')
