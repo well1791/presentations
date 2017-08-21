@@ -5,6 +5,9 @@
 .env
 logs/
 
+# haskell
+.stack-work/
+
 # node
 npm-debug.log*
 yarn-debug.log*

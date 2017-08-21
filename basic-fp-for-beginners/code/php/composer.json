@@ -1,0 +1,13 @@
+{
+    "name": "wmendoza/php",
+    "authors": [
+        {
+            "name": "Wellington Mendoza",
+            "email": "wellington.mendoza.contact@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "basic-fp-for-beginners",
+  "version": "1.0.0",
+  "description": "Basic Functional Programming for Beginners",
+  "devDependencies": {
+    "jest": "^17.0.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/well1791/presentations/tree/master/basic-fp-for-beginners"
+  },
+  "author": "Wellington Mendoza",
+  "license": "MIT",
+  "dependencies": {
+    "sanctuary": "^0.13.2"
+  }
+}
